@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Wheat, ScanLine, ShieldCheck, History as HistoryIcon, Sparkles, Camera,
   Leaf, Zap, Users, Mail, Phone, MapPin, Menu, X, ArrowRight, CheckCircle2,
+  Database, Globe, Brain, Cpu, Image as ImageIcon, ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
