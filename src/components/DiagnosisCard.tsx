@@ -41,12 +41,19 @@ export function DiagnosisCard({ d, imageUrl }: { d: Diagnosis; imageUrl?: string
           </Badge>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span>Confidence:</span>
-          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-primary" style={{ width: `${Math.round(d.confidence * 100)}%` }} />
+        <div className="rounded-lg border border-border bg-muted/30 p-4">
+          <div className="flex items-baseline justify-between mb-2">
+            <span className="text-sm font-medium text-muted-foreground">Prediction rate</span>
+            <span className="text-3xl font-bold tabular-nums text-primary">
+              {Math.round(d.confidence * 100)}<span className="text-lg text-muted-foreground">%</span>
+            </span>
           </div>
-          <span className="font-medium tabular-nums">{Math.round(d.confidence * 100)}%</span>
+          <div className="h-2 bg-muted rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-primary transition-all" style={{ width: `${Math.round(d.confidence * 100)}%` }} />
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Model confidence that this matches <span className="font-medium text-foreground">{d.disease}</span>.
+          </p>
         </div>
 
         <div>
