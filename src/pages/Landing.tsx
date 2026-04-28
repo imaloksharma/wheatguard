@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import heroWheat from "@/assets/hero-wheat.jpg";
+import heroIllustration from "@/assets/hero-illustration.png";
 import featureScan from "@/assets/feature-scan.jpg";
 import diseaseLeaf from "@/assets/disease-leaf.jpg";
 import aboutFarmers from "@/assets/about-farmers.jpg";
@@ -124,19 +124,15 @@ export default function Landing() {
       </header>
 
       {/* HERO */}
-      <section id="home" className="relative overflow-hidden">
-        <img
-          src={heroWheat}
-          alt="Lush green wheat field at sunrise"
-          className="absolute inset-0 w-full h-full object-cover"
-          width={1920}
-          height={1080}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      <section id="home" className="relative overflow-hidden bg-hero-animated">
+        {/* animated gradient blobs */}
+        <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-primary/30 blur-3xl float-slower" />
+        <div className="absolute top-1/3 -right-24 h-96 w-96 rounded-full bg-primary-glow/30 blur-3xl float-slow" />
+        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-accent/60 blur-3xl float-slow" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
         <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-32 grid md:grid-cols-2 gap-10 items-center">
-          <div>
+          <div className="animate-fade-in">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card/80 backdrop-blur border border-border text-accent-foreground text-xs font-medium mb-4 shadow-card">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> AI-powered crop health
             </div>
@@ -148,7 +144,7 @@ export default function Landing() {
               powdery mildew and more — with severity ratings and treatment guidance, in seconds.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="shadow-soft">
+              <Button asChild size="lg" className="shadow-soft hover-scale">
                 <Link to={ctaHref}>{ctaLabel} <ArrowRight className="h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-card/70 backdrop-blur"><a href="#features">Learn more</a></Button>
@@ -160,19 +156,22 @@ export default function Landing() {
             </div>
           </div>
 
-          <div className="relative hidden md:block">
-            <div className="absolute -top-6 -left-6 h-24 w-24 rounded-full bg-primary/20 blur-2xl" />
-            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-primary-glow/30 blur-3xl" />
-            <div className="relative aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-soft border-4 border-card">
-              <img
-                src={featureScan}
-                alt="Phone scanning wheat plant with AI"
-                className="w-full h-full object-cover"
-                width={1024}
-                height={1024}
-              />
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-card rounded-xl shadow-card p-3 flex items-center gap-2">
+          {/* Illustration stack */}
+          <div className="relative h-[420px] md:h-[520px] animate-fade-in">
+            {/* glow disc */}
+            <div className="absolute inset-0 m-auto h-72 w-72 md:h-96 md:w-96 rounded-full bg-gradient-primary opacity-20 blur-2xl" />
+            {/* circular frame */}
+            <div className="absolute inset-0 m-auto h-72 w-72 md:h-96 md:w-96 rounded-full border-2 border-dashed border-primary/30 float-slower" />
+            {/* main wheat illustration */}
+            <img
+              src={heroIllustration}
+              alt="Stylized wheat illustration"
+              className="absolute inset-0 m-auto h-80 w-80 md:h-[440px] md:w-[440px] object-contain drop-shadow-xl float-slow"
+              width={1024}
+              height={1024}
+            />
+            {/* floating chip: detected */}
+            <div className="absolute top-6 left-2 md:left-0 bg-card/90 backdrop-blur rounded-xl shadow-card p-3 flex items-center gap-2 animate-fade-in">
               <div className="h-9 w-9 rounded-lg bg-gradient-primary flex items-center justify-center">
                 <ScanLine className="h-4 w-4 text-primary-foreground" />
               </div>
@@ -180,6 +179,21 @@ export default function Landing() {
                 <div className="text-xs text-muted-foreground">Detected</div>
                 <div className="text-sm font-semibold">Leaf Rust · 94%</div>
               </div>
+            </div>
+            {/* floating chip: healthy */}
+            <div className="absolute bottom-8 right-2 md:right-0 bg-card/90 backdrop-blur rounded-xl shadow-card p-3 flex items-center gap-2 animate-fade-in">
+              <div className="h-9 w-9 rounded-lg bg-accent flex items-center justify-center">
+                <CheckCircle2 className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">Status</div>
+                <div className="text-sm font-semibold">Healthy crop</div>
+              </div>
+            </div>
+            {/* floating chip: AI vision */}
+            <div className="hidden md:flex absolute top-1/2 right-4 -translate-y-1/2 bg-card/90 backdrop-blur rounded-full shadow-card px-3 py-1.5 items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              <span className="text-xs font-medium">AI vision</span>
             </div>
           </div>
         </div>

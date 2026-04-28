@@ -96,4 +96,27 @@
   .bg-gradient-soft { background: var(--gradient-soft); }
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-card { box-shadow: var(--shadow-card); }
+
+  .bg-hero-animated {
+    background: linear-gradient(120deg,
+      hsl(120 40% 97%) 0%,
+      hsl(125 55% 88%) 25%,
+      hsl(130 65% 80%) 50%,
+      hsl(125 55% 88%) 75%,
+      hsl(120 40% 97%) 100%);
+    background-size: 300% 300%;
+    animation: hero-gradient 14s ease infinite;
+  }
+
+  .float-slow { animation: float-slow 6s ease-in-out infinite; }
+  .float-slower { animation: float-slow 9s ease-in-out infinite; }
+}
+
+@keyframes hero-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
 }
