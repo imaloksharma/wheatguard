@@ -31,7 +31,7 @@ export default function Auth() {
   }, []);
 
   if (loading) return null;
-  if (user) return <Navigate to="/" replace />;
+  if (user) return <Navigate to="/app" replace />;
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,14 +47,14 @@ export default function Auth() {
       email: parsed.data.email,
       password: parsed.data.password,
       options: {
-        emailRedirectTo: `${window.location.origin}/`,
+        emailRedirectTo: `${window.location.origin}/app`,
         data: { full_name: parsed.data.fullName },
       },
     });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
     toast.success("Welcome to WheatGuard!");
-    navigate("/");
+    navigate("/app");
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,7 +66,7 @@ export default function Auth() {
     const { error } = await supabase.auth.signInWithPassword({ email: parsed.data.email, password: parsed.data.password });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
-    navigate("/");
+    navigate("/app");
   };
 
   return (

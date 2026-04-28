@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 
 const items = [
-  { title: "Detect Disease", url: "/", icon: ScanLine },
-  { title: "Scan History", url: "/history", icon: History },
-  { title: "Profile", url: "/profile", icon: User },
+  { title: "Home", url: "/", icon: Wheat },
+  { title: "Detect Disease", url: "/app", icon: ScanLine },
+  { title: "Scan History", url: "/app/history", icon: History },
+  { title: "Profile", url: "/app/profile", icon: User },
 ];
 
 export function AppSidebar() {
