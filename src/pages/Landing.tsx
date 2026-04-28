@@ -440,7 +440,7 @@ export default function Landing() {
           <div className="mt-10 text-center">
             <div className="inline-flex flex-wrap justify-center items-center gap-3 px-6 py-3 rounded-full bg-card border border-border shadow-card">
               <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Backed by Lovable AI · Gemini Vision</span>
+              <span className="text-sm font-medium">Trained insights from 3,000+ wheat field images</span>
             </div>
           </div>
         </div>
