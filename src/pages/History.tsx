@@ -45,6 +45,46 @@ export default function History() {
     toast.success("Scan removed");
   };
 
+  const downloadSinglePdf = (s: Scan, index: number) => {
+    try {
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
+      const pageW = doc.internal.pageSize.getWidth();
+
+      doc.setFillColor(31, 122, 58);
+      doc.rect(0, 0, pageW, 70, "F");
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(18);
+      doc.text("WheatGuard — Scan Report", 40, 35);
+      doc.setFontSize(10);
+      doc.text(`Generated: ${new Date().toLocaleString()}`, 40, 55);
+
+      autoTable(doc, {
+        startY: 100,
+        head: [["Field", "Value"]],
+        body: [
+          ["Scan ID", s.id],
+          ["Crop", "Wheat"],
+          ["Detected Disease", s.disease],
+          ["Status", s.is_healthy ? "Healthy" : "Disease Detected"],
+          ["Confidence", `${Math.round((s.confidence || 0) * 100)}%`],
+          ["Severity", s.severity || "—"],
+          ["Timestamp", new Date(s.created_at).toLocaleString()],
+          ["Description", s.description || "—"],
+          ["Treatment", s.treatment || "—"],
+        ],
+        styles: { fontSize: 10, cellPadding: 8, valign: "top" },
+        headStyles: { fillColor: [31, 122, 58], textColor: 255 },
+        columnStyles: { 0: { cellWidth: 130, fontStyle: "bold" } },
+      });
+
+      const safeName = s.disease.replace(/[^a-z0-9]+/gi, "-").toLowerCase().slice(0, 40);
+      doc.save(`wheatguard-scan-${index + 1}-${safeName}.pdf`);
+      toast.success("Scan report downloaded");
+    } catch {
+      toast.error("Failed to generate PDF");
+    }
+  };
+
   const downloadPdf = () => {
     if (scans.length === 0) {
       toast.error("No scans to export");
@@ -144,9 +184,19 @@ export default function History() {
                   {new Date(s.created_at).toLocaleString()} · {Math.round((s.confidence || 0) * 100)}% confidence
                 </p>
                 {s.description && <p className="text-xs sm:text-sm line-clamp-2 text-muted-foreground">{s.description}</p>}
-                <Button variant="ghost" size="sm" onClick={() => remove(s.id)} className="text-destructive hover:text-destructive h-8 px-2">
-                  <Trash2 className="h-3.5 w-3.5 mr-1" />Delete
-                </Button>
+                <div className="flex flex-wrap items-center gap-1 pt-1">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => downloadSinglePdf(s, scans.indexOf(s))}
+                    className="h-8 px-2 text-xs"
+                  >
+                    <Download className="h-3.5 w-3.5 mr-1" />PDF
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={() => remove(s.id)} className="text-destructive hover:text-destructive h-8 px-2 text-xs">
+                    <Trash2 className="h-3.5 w-3.5 mr-1" />Delete
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}
