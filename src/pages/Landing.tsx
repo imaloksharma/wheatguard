@@ -186,17 +186,22 @@ export default function Landing() {
       </section>
 
       {/* FEATURES */}
-      <section id="features" className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
+      <section id="features" className="relative py-16 md:py-24 overflow-hidden">
+        <img src={wheatIcon} alt="" aria-hidden className="absolute -top-10 -right-10 w-72 opacity-20 pointer-events-none" />
+        <img src={wheatIcon} alt="" aria-hidden className="absolute -bottom-10 -left-10 w-72 opacity-10 pointer-events-none rotate-180" />
+        <div className="relative max-w-7xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-3">
+              <Sparkles className="h-3.5 w-3.5" /> Features
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">Everything you need to protect your crop</h2>
             <p className="text-muted-foreground">Built for farmers, agronomists, and researchers.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((f) => (
-              <Card key={f.title} className="p-6 shadow-card hover:shadow-soft transition-shadow">
-                <div className="h-10 w-10 rounded-lg bg-accent flex items-center justify-center mb-4">
-                  <f.icon className="h-5 w-5 text-primary" />
+              <Card key={f.title} className="group p-6 shadow-card hover:shadow-soft hover:-translate-y-1 transition-all duration-300 border-border/60">
+                <div className="h-12 w-12 rounded-xl bg-gradient-primary flex items-center justify-center mb-4 shadow-soft group-hover:scale-110 transition-transform">
+                  <f.icon className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <h3 className="font-semibold mb-2">{f.title}</h3>
                 <p className="text-sm text-muted-foreground">{f.desc}</p>
@@ -207,20 +212,27 @@ export default function Landing() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="py-16 md:py-24 bg-secondary/40">
-        <div className="max-w-7xl mx-auto px-4">
+      <section id="how" className="py-16 md:py-24 bg-secondary/40 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-soft opacity-50 pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card text-accent-foreground text-xs font-medium mb-3 shadow-card">
+              <Zap className="h-3.5 w-3.5 text-primary" /> Process
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">How it works</h2>
             <p className="text-muted-foreground">Diagnose your wheat in four simple steps.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {steps.map((s) => (
-              <Card key={s.n} className="p-6 shadow-card">
-                <div className="h-10 w-10 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center font-bold mb-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 relative">
+            {steps.map((s, i) => (
+              <Card key={s.n} className="relative p-6 shadow-card hover:shadow-soft transition-shadow">
+                <div className="h-12 w-12 rounded-2xl bg-gradient-primary text-primary-foreground flex items-center justify-center font-bold text-lg mb-3 shadow-soft">
                   {s.n}
                 </div>
                 <h3 className="font-semibold mb-2">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.desc}</p>
+                {i < steps.length - 1 && (
+                  <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 h-5 w-5 text-primary/40" />
+                )}
               </Card>
             ))}
           </div>
@@ -230,15 +242,54 @@ export default function Landing() {
       {/* DISEASES */}
       <section id="diseases" className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Diseases we detect</h2>
-            <p className="text-muted-foreground">Trained on the most common and damaging wheat diseases worldwide.</p>
+          <div className="grid md:grid-cols-2 gap-10 items-center mb-12">
+            <div className="relative">
+              <div className="absolute -top-4 -left-4 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
+              <div className="relative rounded-3xl overflow-hidden shadow-soft border-4 border-card">
+                <img
+                  src={diseaseLeaf}
+                  alt="Close-up of wheat leaf with rust disease spots"
+                  className="w-full h-72 md:h-96 object-cover"
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-card rounded-xl shadow-card p-3 flex items-center gap-2">
+                <div className="h-9 w-9 rounded-lg bg-destructive/10 flex items-center justify-center">
+                  <Leaf className="h-4 w-4 text-destructive" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Severity</div>
+                  <div className="text-sm font-semibold">Moderate</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-3">
+                <Leaf className="h-3.5 w-3.5" /> Disease library
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Diseases we detect</h2>
+              <p className="text-muted-foreground mb-4">
+                Trained on the most common and damaging wheat diseases worldwide. Catch outbreaks early
+                and act before they spread across your field.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {diseases.map((d) => (
+                  <span key={d.name} className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">
+                    {d.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {diseases.map((d) => (
-              <Card key={d.name} className="p-6 shadow-card">
+              <Card key={d.name} className="p-6 shadow-card hover:shadow-soft transition-shadow border-l-4 border-l-primary">
                 <div className="flex items-center gap-2 mb-2">
-                  <Leaf className="h-5 w-5 text-primary" />
+                  <div className="h-8 w-8 rounded-lg bg-accent flex items-center justify-center">
+                    <Leaf className="h-4 w-4 text-primary" />
+                  </div>
                   <h3 className="font-semibold">{d.name}</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">{d.desc}</p>
@@ -250,40 +301,56 @@ export default function Landing() {
 
       {/* ABOUT */}
       <section id="about" className="py-16 md:py-24 bg-secondary/40">
-        <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">About WheatGuard</h2>
+        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+          <div className="relative order-2 md:order-1">
+            <div className="absolute -top-6 -right-6 h-32 w-32 rounded-full bg-primary-glow/30 blur-3xl" />
+            <div className="relative rounded-3xl overflow-hidden shadow-soft border-4 border-card">
+              <img
+                src={aboutFarmers}
+                alt="Farmers using a tablet in a wheat field"
+                className="w-full h-80 md:h-[420px] object-cover"
+                loading="lazy"
+                width={1280}
+                height={960}
+              />
+            </div>
+          </div>
+          <div className="order-1 md:order-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card text-accent-foreground text-xs font-medium mb-3 shadow-card">
+              <Users className="h-3.5 w-3.5 text-primary" /> About us
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Built with farmers, for farmers</h2>
             <p className="text-muted-foreground mb-4">
               WheatGuard helps farmers identify wheat diseases early, when treatment is most effective.
               By combining computer vision with agronomy expertise, we deliver lab-grade accuracy from
               a single photo — no special equipment required.
             </p>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-6">
               Our mission is to make crop health diagnostics affordable and accessible for every wheat
               grower, from smallholder farms to large estates.
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <Card className="p-6 text-center">
-              <Users className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl font-bold">10k+</div>
-              <div className="text-xs text-muted-foreground">Farmers helped</div>
-            </Card>
-            <Card className="p-6 text-center">
-              <ScanLine className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl font-bold">50k+</div>
-              <div className="text-xs text-muted-foreground">Scans completed</div>
-            </Card>
-            <Card className="p-6 text-center">
-              <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl font-bold">12+</div>
-              <div className="text-xs text-muted-foreground">Diseases detected</div>
-            </Card>
-            <Card className="p-6 text-center">
-              <ShieldCheck className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl font-bold">95%</div>
-              <div className="text-xs text-muted-foreground">Accuracy</div>
-            </Card>
+            <div className="grid grid-cols-2 gap-3">
+              <Card className="p-4 text-center bg-card">
+                <Users className="h-5 w-5 text-primary mx-auto mb-1" />
+                <div className="text-xl font-bold">10k+</div>
+                <div className="text-xs text-muted-foreground">Farmers helped</div>
+              </Card>
+              <Card className="p-4 text-center bg-card">
+                <ScanLine className="h-5 w-5 text-primary mx-auto mb-1" />
+                <div className="text-xl font-bold">50k+</div>
+                <div className="text-xs text-muted-foreground">Scans completed</div>
+              </Card>
+              <Card className="p-4 text-center bg-card">
+                <Leaf className="h-5 w-5 text-primary mx-auto mb-1" />
+                <div className="text-xl font-bold">12+</div>
+                <div className="text-xs text-muted-foreground">Diseases detected</div>
+              </Card>
+              <Card className="p-4 text-center bg-card">
+                <ShieldCheck className="h-5 w-5 text-primary mx-auto mb-1" />
+                <div className="text-xl font-bold">95%</div>
+                <div className="text-xs text-muted-foreground">Accuracy</div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
