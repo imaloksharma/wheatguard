@@ -54,7 +54,7 @@ export default function Auth() {
     setBusy(false);
     if (error) { toast.error(error.message); return; }
     toast.success("Welcome to WheatGuard!");
-    navigate("/");
+    navigate("/app");
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,7 +66,7 @@ export default function Auth() {
     const { error } = await supabase.auth.signInWithPassword({ email: parsed.data.email, password: parsed.data.password });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
-    navigate("/");
+    navigate("/app");
   };
 
   return (
