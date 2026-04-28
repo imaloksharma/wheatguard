@@ -19,6 +19,8 @@ const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How it works", href: "#how" },
   { label: "Diseases", href: "#diseases" },
+  { label: "Dataset", href: "#dataset" },
+  { label: "AI", href: "#ai" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
