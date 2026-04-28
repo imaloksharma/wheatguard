@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import heroWheat from "@/assets/hero-wheat.jpg";
+import heroIllustration from "@/assets/hero-illustration.png";
 import featureScan from "@/assets/feature-scan.jpg";
 import diseaseLeaf from "@/assets/disease-leaf.jpg";
 import aboutFarmers from "@/assets/about-farmers.jpg";
