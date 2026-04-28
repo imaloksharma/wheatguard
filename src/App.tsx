@@ -9,6 +9,7 @@ import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Detect from "./pages/Detect";
 import History from "./pages/History";
+import Training from "./pages/Training";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/app" element={<AppLayout><Detect /></AppLayout>} />
             <Route path="/app/history" element={<AppLayout><History /></AppLayout>} />
+            <Route path="/app/training" element={<AppLayout><Training /></AppLayout>} />
             <Route path="/app/profile" element={<AppLayout><Profile /></AppLayout>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

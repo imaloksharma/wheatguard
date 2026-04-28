@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { Wheat, ScanLine, History, User, LogOut } from "lucide-react";
+import { Wheat, ScanLine, History, User, LogOut, Cpu } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter, useSidebar,
@@ -11,6 +11,7 @@ const items = [
   { title: "Home", url: "/", icon: Wheat },
   { title: "Detect Disease", url: "/app", icon: ScanLine },
   { title: "Scan History", url: "/app/history", icon: History },
+  { title: "Training Runner", url: "/app/training", icon: Cpu },
   { title: "Profile", url: "/app/profile", icon: User },
 ];
 
