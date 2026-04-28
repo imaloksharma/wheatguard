@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import AppLayout from "@/components/AppLayout";
+import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Detect from "./pages/Detect";
 import History from "./pages/History";
@@ -21,10 +22,11 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/" element={<AppLayout><Detect /></AppLayout>} />
-            <Route path="/history" element={<AppLayout><History /></AppLayout>} />
-            <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
+            <Route path="/app" element={<AppLayout><Detect /></AppLayout>} />
+            <Route path="/app/history" element={<AppLayout><History /></AppLayout>} />
+            <Route path="/app/profile" element={<AppLayout><Profile /></AppLayout>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
