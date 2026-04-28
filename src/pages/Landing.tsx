@@ -124,13 +124,23 @@ export default function Landing() {
       </header>
 
       {/* HERO */}
-      <section id="home" className="bg-gradient-soft">
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <section id="home" className="relative overflow-hidden">
+        <img
+          src={heroWheat}
+          alt="Lush green wheat field at sunrise"
+          className="absolute inset-0 w-full h-full object-cover"
+          width={1920}
+          height={1080}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+
+        <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-32 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-4">
-              <Sparkles className="h-3.5 w-3.5" /> AI-powered crop health
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card/80 backdrop-blur border border-border text-accent-foreground text-xs font-medium mb-4 shadow-card">
+              <Sparkles className="h-3.5 w-3.5 text-primary" /> AI-powered crop health
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
               Detect wheat diseases <span className="text-primary">instantly</span> with AI
             </h1>
             <p className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl">
@@ -138,10 +148,10 @@ export default function Landing() {
               powdery mildew and more — with severity ratings and treatment guidance, in seconds.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="shadow-soft">
                 <Link to={ctaHref}>{ctaLabel} <ArrowRight className="h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline"><a href="#features">Learn more</a></Button>
+              <Button asChild size="lg" variant="outline" className="bg-card/70 backdrop-blur"><a href="#features">Learn more</a></Button>
             </div>
             <div className="flex flex-wrap gap-6 mt-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> Free to start</div>
@@ -150,13 +160,25 @@ export default function Landing() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="aspect-square max-w-md mx-auto rounded-3xl bg-gradient-primary p-1 shadow-soft">
-              <div className="w-full h-full rounded-[1.4rem] bg-card flex items-center justify-center">
-                <div className="text-center p-8">
-                  <Wheat className="h-24 w-24 text-primary mx-auto mb-4" />
-                  <p className="text-sm text-muted-foreground">Smart wheat protection</p>
-                </div>
+          <div className="relative hidden md:block">
+            <div className="absolute -top-6 -left-6 h-24 w-24 rounded-full bg-primary/20 blur-2xl" />
+            <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-primary-glow/30 blur-3xl" />
+            <div className="relative aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-soft border-4 border-card">
+              <img
+                src={featureScan}
+                alt="Phone scanning wheat plant with AI"
+                className="w-full h-full object-cover"
+                width={1024}
+                height={1024}
+              />
+            </div>
+            <div className="absolute -bottom-4 -left-4 bg-card rounded-xl shadow-card p-3 flex items-center gap-2">
+              <div className="h-9 w-9 rounded-lg bg-gradient-primary flex items-center justify-center">
+                <ScanLine className="h-4 w-4 text-primary-foreground" />
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">Detected</div>
+                <div className="text-sm font-semibold">Leaf Rust · 94%</div>
               </div>
             </div>
           </div>
