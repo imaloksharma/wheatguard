@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
 import heroIllustration from "@/assets/hero-illustration.png";
 import featureScan from "@/assets/feature-scan.jpg";
@@ -105,14 +105,14 @@ export default function Landing() {
       {/* MOBILE LEFT SIDEBAR */}
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="w-72 p-0 md:hidden">
-          <SheetHeader className="px-4 py-4 border-b border-border">
-            <SheetTitle className="flex items-center gap-2">
+          <div className="px-4 py-4 border-b border-border">
+            <SheetTitle className="flex items-center gap-2 text-base">
               <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
                 <Wheat className="h-4 w-4 text-primary-foreground" />
               </div>
               <span>WheatGuard</span>
             </SheetTitle>
-          </SheetHeader>
+          </div>
           <div className="px-3 py-3 flex flex-col gap-1">
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} onClick={close}
