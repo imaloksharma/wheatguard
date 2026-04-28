@@ -45,7 +45,30 @@ export default function History() {
     toast.success("Scan removed");
   };
 
-  const downloadSinglePdf = (s: Scan, index: number) => {
+  const loadImageAsDataUrl = (url: string): Promise<{ data: string; w: number; h: number; fmt: "JPEG" } | null> =>
+    new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        try {
+          const maxW = 480;
+          const scale = Math.min(1, maxW / img.width);
+          const w = Math.round(img.width * scale);
+          const h = Math.round(img.height * scale);
+          const canvas = document.createElement("canvas");
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return resolve(null);
+          ctx.drawImage(img, 0, 0, w, h);
+          const data = canvas.toDataURL("image/jpeg", 0.85);
+          resolve({ data, w, h, fmt: "JPEG" });
+        } catch { resolve(null); }
+      };
+      img.onerror = () => resolve(null);
+      img.src = url;
+    });
+
+  const downloadSinglePdf = async (s: Scan, index: number) => {
     try {
       const doc = new jsPDF({ unit: "pt", format: "a4" });
       const pageW = doc.internal.pageSize.getWidth();
@@ -58,8 +81,20 @@ export default function History() {
       doc.setFontSize(10);
       doc.text(`Generated: ${new Date().toLocaleString()}`, 40, 55);
 
+      let nextY = 100;
+      const img = await loadImageAsDataUrl(s.image_url);
+      if (img) {
+        const thumbW = 180;
+        const thumbH = (img.h / img.w) * thumbW;
+        doc.addImage(img.data, img.fmt, 40, nextY, thumbW, thumbH);
+        doc.setTextColor(120, 120, 120);
+        doc.setFontSize(8);
+        doc.text("Detected crop image", 40, nextY + thumbH + 12);
+        nextY = nextY + thumbH + 28;
+      }
+
       autoTable(doc, {
-        startY: 100,
+        startY: nextY,
         head: [["Field", "Value"]],
         body: [
           ["Scan ID", s.id],
